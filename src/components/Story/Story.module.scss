@@ -1,0 +1,114 @@
+.video {
+  height: 80vh;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  border-bottom: 8px solid #232323;
+  .sub {
+    width: 50%;
+    h1 {
+      margin: 0;
+      font-size: 3rem;
+      font-weight: 900;
+    }
+    p {
+      font-size: 1.5rem;
+      font-weight: 400;
+      margin: 1rem 0 0;
+    }
+  }
+  .main {
+    position: relative;
+    .unfit {
+      position: absolute;
+      left: 105px;
+      z-index: -1;
+      top: 40px;
+      width: 66%;
+    }
+    .fit {
+      position: absolute;
+      left: 78px;
+      z-index: -1;
+      top: 98px;
+    }
+  }
+}
+
+.image {
+  height: 80vh;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  border-bottom: 8px solid #232323;
+  .sub {
+    width: 50%;
+    h1 {
+      margin: 0;
+      font-size: 3rem;
+      font-weight: 900;
+    }
+    p {
+      font-size: 1.5rem;
+      font-weight: 400;
+      margin: 1rem 0 0;
+    }
+  }
+  .main {
+    position: relative;
+
+    .card {
+      width: 60%;
+      height: 25%;
+      display: flex;
+      align-items: center;
+      position: absolute;
+      border: 2px solid rgba(128, 128, 128, 0.7);
+      box-shadow: 0 0 2em 0 rgb(0, 0, 0);
+      border-radius: 0.75rem;
+      background-color: black;
+      z-index: 1;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 8%;
+      padding: 10px;
+      .poster {
+        margin-right: 10px;
+        height: 100%;
+        img {
+          object-fit: cover;
+          height: 100%;
+        }
+      }
+      .title-card {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        flex: 1 1;
+        text-align: left;
+        margin: 0.3rem 0;
+        p:nth-child(1) {
+          font-weight: 500;
+          font-size: 1.4rem;
+        }
+        p:nth-child(2) {
+          font-weight: 400;
+          color: #0071eb;
+        }
+      }
+      .animation {
+        width: 3rem;
+        height: 3rem;
+        outline: 2px solid rgb(0, 0, 0);
+        outline-offset: -2px;
+        display: block;
+        background: url(https://assets.nflxext.com/ffe/siteui/acquisition/ourStory/fuji/desktop/download-icon.gif)
+          center center no-repeat;
+        background-size: 100%;
+        content: "";
+        flex-grow: 0;
+        flex-shrink: 0;
+      }
+    }
+  }
+}
