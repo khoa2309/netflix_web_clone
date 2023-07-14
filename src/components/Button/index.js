@@ -3,13 +3,22 @@ import styles from "./Button.module.scss";
 import { Link } from "react-router-dom";
 
 const c = classNames.bind(styles);
-function Button({ children, login = false, to, href, onClick, ...passProps }) {
+function Button({
+  children,
+  login = false,
+  signup = false,
+  to,
+  href,
+  onClick,
+  ...passProps
+}) {
   let Comp = "button";
 
   const props = {
     ...passProps,
   };
-  if (login) {
+
+  if (login || signup) {
     props.type = "submit";
   }
   if (onClick) {
@@ -24,7 +33,7 @@ function Button({ children, login = false, to, href, onClick, ...passProps }) {
     Comp = "a";
   }
 
-  const classes = c("wrapper", { login });
+  const classes = c("wrapper", { login, signup });
 
   return (
     <Comp className={classes} {...props}>

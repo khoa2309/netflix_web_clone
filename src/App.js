@@ -6,12 +6,13 @@ import { Fragment, useState } from "react";
 
 function App() {
   const [user, setUser] = useState(null);
-  let Layout = MainLayout;
+
   return (
     <Router>
       <div className="Netflix">
         <Routes>
           {publicRoutes.map((route, index) => {
+            let Layout = MainLayout;
             if (route.layout) {
               Layout = route.layout;
             } else if (route.layout === null) {
@@ -23,7 +24,7 @@ function App() {
                 key={index}
                 path={route.path}
                 element={
-                  <Layout>
+                  <Layout path={route.path}>
                     <Page user={user} />
                   </Layout>
                 }

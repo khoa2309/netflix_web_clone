@@ -7,17 +7,19 @@ import Button from "~/components/Button";
 
 const c = classNames.bind(styles);
 
-export default function Header() {
+export default function Header({ path }) {
   return (
     <header className={c("inner")}>
       <Link to={config.routes.guest}>
         <img src={img.logo.default} alt="Netflix" />
       </Link>
-      <div className={c("actions")}>
-        <Button login to={config.routes.login}>
-          Đăng nhập
-        </Button>
-      </div>
+      {path === "/" ? (
+        <div className={c("actions")}>
+          <Button login to={config.routes.login}>
+            Đăng nhập
+          </Button>
+        </div>
+      ) : null}
     </header>
   );
 }

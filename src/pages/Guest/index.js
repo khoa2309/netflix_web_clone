@@ -3,7 +3,9 @@ import { useNavigate } from "react-router-dom";
 import classNames from "classnames/bind";
 import styles from "./Guest.module.scss";
 import Story from "~/components/Story";
-import Form from "~/components/Form";
+import Signup from "~/components/Signup";
+import Footer from "~/layout/conmponents/Footer";
+
 const c = classNames.bind(styles);
 
 export default function Guest({ user, ...props }) {
@@ -68,14 +70,15 @@ export default function Guest({ user, ...props }) {
             Bạn đã sẵn sàng xem chưa? Nhập email để tạo hoặc kích hoạt lại tư
             cách thành viên của bạn.
           </p>
-          <Form onlyForm />
+          <Signup onlyForm />
         </div>
       </div>
       <Story video={video[0]}></Story>
       <Story image={image[0]}></Story>
       <Story video={video[1]}></Story>
       <Story image={image[1]}></Story>
-      <Form withContact />
+      <Signup withContact />
+      <Footer SignUp />
     </div>
   );
 }
