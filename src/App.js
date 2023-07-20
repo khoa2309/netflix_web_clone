@@ -1,11 +1,23 @@
-import "./App.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { publicRoutes } from "./routes";
 import MainLayout from "./layout/MainLayout";
-import { Fragment, useState } from "react";
+import { Fragment, useEffect } from "react";
+import { auth } from "./firebase";
+import { useDispatch } from "react-redux";
+import { login, logout } from "./features/userSlice";
 
 function App() {
-  const [user, setUser] = useState(null);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    const unsubcribe = auth.onAuthStateChanged((userAuth) => {
+      if (userAuth) {
+        dispatch(login({ uid: userAuth.uid, email: userAuth.email }));
+      } else {
+        dispatch(logout());
+      }
+    });
+    return unsubcribe;
+  }, [dispatch]);
 
   return (
     <Router>
@@ -25,7 +37,7 @@ function App() {
                 path={route.path}
                 element={
                   <Layout path={route.path}>
-                    <Page user={user} />
+                    <Page />
                   </Layout>
                 }
               />

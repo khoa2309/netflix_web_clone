@@ -7,6 +7,11 @@ function Button({
   children,
   login = false,
   signup = false,
+  large = false,
+  vibe = false,
+  play = false,
+  moreDesc = false,
+  SignOut = false,
   to,
   href,
   onClick,
@@ -33,7 +38,15 @@ function Button({
     Comp = "a";
   }
 
-  const classes = c("wrapper", { login, signup });
+  const classes = c("wrapper", {
+    login,
+    signup,
+    large,
+    vibe,
+    play,
+    moreDesc,
+    SignOut,
+  });
 
   return (
     <Comp className={classes} {...props}>

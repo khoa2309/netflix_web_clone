@@ -6,12 +6,16 @@ import styles from "./Signup.module.scss";
 import Button from "~/components/Button";
 import Contact from "../Contact";
 import config from "~/config";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setcurrValue } from "~/features/emailSlice";
 const c = classNames.bind(styles);
 
 function Signup({ onlyForm, withContact }) {
   const [value, setValue] = useState("");
   const [message, setMessage] = useState("Bạn cần nhập email");
   const inputRef = useRef(null);
+  const dispatch = useDispatch();
 
   const isEmail = (value) => {
     let check = false;
@@ -22,6 +26,7 @@ function Signup({ onlyForm, withContact }) {
     return check;
   };
 
+  const navigate = useNavigate();
   const handleClick = (e) => {
     e.preventDefault();
     inputRef.current.focus();
@@ -33,6 +38,8 @@ function Signup({ onlyForm, withContact }) {
       } else {
         document.getElementById("error-span").style.visibility = "hidden";
         document.getElementById("wrapper").style.borderColor = "green";
+        dispatch(setcurrValue(value));
+        navigate("/login");
       }
       if (value.search("@") === -1) {
         setMessage("Bạn cần nhập email");
@@ -55,6 +62,8 @@ function Signup({ onlyForm, withContact }) {
         document.getElementById("error-span-contact").style.visibility =
           "hidden";
         document.getElementById("wrapper-contact").style.borderColor = "green";
+        dispatch(setcurrValue(value));
+        navigate("/login");
       }
       if (value.search("@") === -1) {
         setMessage("Bạn cần nhập email");

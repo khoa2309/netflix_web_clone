@@ -1,5 +1,12 @@
+import Nav from "../conmponents/Nav";
+
 function MainLayout({ children }) {
-  return <div>{children}</div>;
+  return (
+    <>
+      <Nav />
+      <div>{children}</div>
+    </>
+  );
 }
 
 export default MainLayout;

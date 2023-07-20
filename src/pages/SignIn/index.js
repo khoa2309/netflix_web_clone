@@ -1,7 +1,7 @@
 import Form from "~/components/Form";
 import classNames from "classnames/bind";
 import styles from "./SignIn.module.scss";
-import Footer from "~/layout/conmponents/Footer";
+import Footer from "~/components/Footer";
 const c = classNames.bind(styles);
 export default function SignIn() {
   return (

@@ -1,7 +1,7 @@
 :root {
   --bg-color: black;
   --tx-color: white;
-  --link-color: rgba(255, 255, 255, 0.7);
+  --link-color: #e5e5e5;
 }
 
 * {
@@ -19,22 +19,22 @@ body {
 
 @font-face {
   font-family: "MyFont";
-  src: url("../../assets/NetflixSans_W_Blk.woff2");
+  src: url("../../assets/fonts/NetflixSans_W_Blk.woff2");
   font-weight: 700;
 }
 @font-face {
   font-family: "MyFont";
-  src: url("../../assets/NetflixSans_W_Bd.woff2");
+  src: url("../../assets/fonts/NetflixSans_W_Bd.woff2");
   font-weight: 600;
 }
 @font-face {
   font-family: "MyFont";
-  src: url("../../assets/NetflixSans_W_Md.woff2");
+  src: url("../../assets/fonts/NetflixSans_W_Md.woff2");
   font-weight: 500;
 }
 @font-face {
   font-family: "MyFont";
-  src: url("../../assets/NetflixSans_W_Rg.woff2");
+  src: url("../../assets/fonts/NetflixSans_W_Rg.woff2");
   font-weight: 400;
 }
 

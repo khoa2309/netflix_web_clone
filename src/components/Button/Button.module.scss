@@ -9,13 +9,21 @@
 }
 
 .login {
-  font-weight: 500;
+  font-weight: 700;
   font-size: 1rem;
   padding: 10px 15px;
   border-radius: 25px;
   transition: 0.3s;
   &:hover {
     background-color: rgb(160, 13, 20);
+  }
+  &.large {
+    width: 100%;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: 700;
+    margin: 24px 0 12px;
+    padding: 16px;
   }
 }
 .signup {
@@ -32,4 +40,36 @@
   &:hover {
     background-color: rgb(160, 13, 20);
   }
+}
+.vibe {
+  background-color: transparent;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--link-color);
+}
+
+.play {
+  background-color: var(--tx-color);
+  color: var(--bg-color);
+  padding: 0.7rem 2.4rem;
+  border-radius: 4px;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.moreDesc {
+  background-color: rgba(109, 109, 110, 0.7);
+  color: var(--tx-color);
+  font-size: 1.1rem;
+  font-weight: 700;
+  border-radius: 4px;
+  padding: 0.7rem 2.4rem;
+  margin-left: 20px;
+}
+
+.SignOut {
+  padding: 10px 20px;
+  font-size: 1rem;
+  margin-top: 5%;
+  width: 100%;
 }

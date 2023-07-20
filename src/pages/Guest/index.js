@@ -4,11 +4,14 @@ import classNames from "classnames/bind";
 import styles from "./Guest.module.scss";
 import Story from "~/components/Story";
 import Signup from "~/components/Signup";
-import Footer from "~/layout/conmponents/Footer";
+import Footer from "~/components/Footer";
+import { useSelector } from "react-redux";
+import { selectUser } from "~/features/userSlice";
 
 const c = classNames.bind(styles);
 
-export default function Guest({ user, ...props }) {
+export default function Guest() {
+  const user = useSelector(selectUser);
   const navigate = useNavigate();
   useEffect(() => {
     if (!user) {
