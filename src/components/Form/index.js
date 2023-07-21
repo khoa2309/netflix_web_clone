@@ -19,7 +19,7 @@ function Form() {
   const navigate = useNavigate();
   const [show, setShow] = useState(false);
   const [toggle, setToggle] = useState(true);
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState(currentEmail);
   const [password, setPassword] = useState("");
   const register = (e) => {
     e.preventDefault();
@@ -56,7 +56,7 @@ function Form() {
           type="email"
           name="email"
           id="email-input"
-          value={currentEmail || email}
+          value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
         <label htmlFor="email-input">Email hoặc số điện thoại</label>
