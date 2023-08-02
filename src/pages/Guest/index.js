@@ -1,11 +1,11 @@
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import classNames from "classnames/bind";
 import styles from "./Guest.module.scss";
 import Story from "~/components/Story";
 import Signup from "~/components/Signup";
 import Footer from "~/components/Footer";
 import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { selectUser } from "~/features/userSlice";
 
 const c = classNames.bind(styles);
@@ -14,12 +14,11 @@ export default function Guest() {
   const user = useSelector(selectUser);
   const navigate = useNavigate();
   useEffect(() => {
-    if (!user) {
-      navigate("/");
-    } else {
+    if (user) {
       navigate("/home");
     }
-  }, [user, navigate]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user]);
   const video = [
     {
       title: "Thưởng thức trên TV của bạn",

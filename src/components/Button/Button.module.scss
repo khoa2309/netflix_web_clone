@@ -6,6 +6,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: all 0.3s;
 }
 
 .login {
@@ -41,12 +42,6 @@
     background-color: rgb(160, 13, 20);
   }
 }
-.vibe {
-  background-color: transparent;
-  font-weight: 600;
-  font-size: 0.9rem;
-  color: var(--link-color);
-}
 
 .play {
   background-color: var(--tx-color);
@@ -55,6 +50,10 @@
   border-radius: 4px;
   font-size: 1.1rem;
   font-weight: 700;
+  text-shadow: none;
+  &:hover {
+    transform: scale(1.2);
+  }
 }
 
 .moreDesc {
@@ -65,6 +64,9 @@
   border-radius: 4px;
   padding: 0.7rem 2.4rem;
   margin-left: 20px;
+  &:hover {
+    transform: scale(1.1);
+  }
 }
 
 .SignOut {
@@ -72,4 +74,5 @@
   font-size: 1rem;
   margin-top: 5%;
   width: 100%;
+  font-weight: 700;
 }

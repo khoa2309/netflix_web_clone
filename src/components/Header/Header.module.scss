@@ -1,6 +1,4 @@
 .inner {
-  margin: auto;
-  max-width: calc(100% - 3rem);
   height: 80px;
   display: flex;
   align-items: center;
@@ -14,6 +12,5 @@
     display: block;
     width: 9.25rem;
     height: 2.5rem;
-    object-fit: cover;
   }
 }

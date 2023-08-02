@@ -4,6 +4,9 @@
   display: flex;
   align-items: center;
   border-bottom: 8px solid #232323;
+  overflow-x: hidden;
+  overflow-y: hidden;
+
   .sub {
     width: 50%;
     h1 {
@@ -41,6 +44,9 @@
   display: flex;
   align-items: center;
   border-bottom: 8px solid #232323;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  will-change: transform;
   .sub {
     width: 50%;
     h1 {
@@ -52,6 +58,9 @@
       font-size: 1.5rem;
       font-weight: 400;
       margin: 1rem 0 0;
+    }
+    &.start {
+      animation: rightToLeft 0.5s linear forwards;
     }
   }
   .main {
@@ -110,5 +119,26 @@
         flex-shrink: 0;
       }
     }
+    &.start {
+      animation: leftToRight 0.5s linear forwards;
+    }
+  }
+}
+
+@keyframes leftToRight {
+  0% {
+    transform: translateX(-110%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+@keyframes rightToLeft {
+  0% {
+    transform: translateX(110%);
+  }
+  100% {
+    transform: translateX(0%);
   }
 }

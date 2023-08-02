@@ -16,7 +16,7 @@ function Profile() {
       <h1>Edit Profile</h1>
       <div className={c("profile__info")}>
         <img
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png"
+          src="https://occ-0-395-55.1.nflxso.net/dnm/api/v6/K6hjPJd6cR6FpVELC5Pd6ovHRSk/AAAABYNwAakf94HfoVx6gz2x8vcyNJa3tTYZPqdyGDJ93nPbawb7vDV7U60_-S5D6yxeDBw1LcQVb01i60Qpgtot-BiSKM179cXngQ.png?r=962"
           alt="avatar"
         />
         <div className={c("profile__details")}>

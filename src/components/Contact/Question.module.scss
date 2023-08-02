@@ -12,6 +12,9 @@
     &:hover {
       background-color: rgb(78, 78, 78);
     }
+    &.start {
+      animation: scale 0.5s linear forwards;
+    }
   }
   .answer {
     display: none;
@@ -26,6 +29,15 @@
       display: block;
       animation: show 0.5s ease-in-out forwards;
     }
+  }
+}
+
+@keyframes scale {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
   }
 }
 

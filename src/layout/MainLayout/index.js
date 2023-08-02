@@ -1,9 +1,9 @@
-import Nav from "../conmponents/Nav";
+import Nav from "../../components/Nav";
 
-function MainLayout({ children }) {
+function MainLayout({ children, path }) {
   return (
     <>
-      <Nav />
+      <Nav path={path} />
       <div>{children}</div>
     </>
   );

@@ -9,6 +9,7 @@
   padding: 0;
   margin: 0;
   letter-spacing: 0 !important;
+  user-select: none;
 }
 
 body {
@@ -48,4 +49,5 @@ input,
 a {
   color: var(--link-color);
   border-radius: 0.125rem;
+  text-decoration: none;
 }

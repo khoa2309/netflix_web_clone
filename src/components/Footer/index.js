@@ -1,5 +1,8 @@
 import classNames from "classnames/bind";
 import styles from "./Footer.module.scss";
+import { Link } from "react-router-dom";
+import config from "~/config";
+import img from "~/assets";
 const c = classNames.bind(styles);
 
 const link = [
@@ -85,11 +88,12 @@ function Footer({ SignIn = false, SignUp = false }) {
         </a>
         <ul className={c("list")}>
           {link.map((link, index) => (
-            <li key={index}>
-              <a href="/">{link.title}</a>
-            </li>
+            <li key={index}>{link.title}</li>
           ))}
         </ul>
+        <Link to={config.routes.guest}>
+          <img src={img.logo.default} alt="Netflix" height={40} />
+        </Link>
         <p>Netflix Việt Nam</p>
       </footer>
     );
@@ -102,11 +106,12 @@ function Footer({ SignIn = false, SignUp = false }) {
         </a>
         <ul className={c("list")}>
           {FooterLogin.map((link, index) => (
-            <li key={index}>
-              <a href="/">{link.title}</a>
-            </li>
+            <li key={index}>{link.title}</li>
           ))}
         </ul>
+        <Link to={config.routes.guest}>
+          <img src={img.logo.default} alt="Netflix" height={40} />
+        </Link>
       </footer>
     );
   }

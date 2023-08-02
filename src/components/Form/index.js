@@ -28,9 +28,10 @@ function Form() {
         alert(
           "Chúc mừng " + userCredential.user.email + " đã đăng ký thành công"
         );
+        setToggle(!toggle);
       })
       .catch((error) => {
-        alert(error.message);
+        alert(error.message.slice(10, error.length));
       });
   };
 
@@ -44,7 +45,7 @@ function Form() {
         navigate("/home");
       })
       .catch((error) => {
-        alert(error.message);
+        alert(error.message.slice(10, error.length));
       });
   };
 
@@ -60,7 +61,6 @@ function Form() {
           onChange={(e) => setEmail(e.target.value)}
         />
         <label htmlFor="email-input">Email hoặc số điện thoại</label>
-        {/* <span>Vui lòng nhập email hoặc số điện thoại hợp lệ.</span> */}
       </div>
       <div className={c("password")}>
         <input
@@ -73,7 +73,6 @@ function Form() {
           onChange={(e) => setPassword(e.target.value)}
         />
         <label htmlFor="password-input">Mật khẩu</label>
-        {/* <span>Mật khẩu của bạn phải chứa từ 4 đến 60 ký tự.</span> */}
       </div>
       {toggle ? (
         <Button login large onClick={login}>
@@ -98,7 +97,6 @@ function Form() {
         ) : (
           <Link onClick={() => setToggle(true)}>Đăng nhập thôi nào!</Link>
         )}
-        {/* to={config.routes.guest} */}
       </p>
       <p className={c("more-desc")}>
         <span>
