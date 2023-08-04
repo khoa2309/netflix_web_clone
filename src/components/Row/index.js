@@ -8,13 +8,13 @@ import {
   faArrowCircleRight,
 } from "@fortawesome/free-solid-svg-icons";
 import Modal from "../Modal";
-import { useSelector } from "react-redux";
-import { selectMylist } from "~/features/mylistSlice";
+
 const c = classNames.bind(styles);
 function Row({
   title,
   fetchUrl,
   result,
+  mylist,
   isLargeRow = false,
   isMyList = false,
   isTypeList = false,
@@ -25,7 +25,6 @@ function Row({
   const [scrollRight, setScrollRight] = useState(true);
   const [modal, setModal] = useState(false);
   const [currentMovie, setCurrentMovie] = useState({});
-  const mylist = useSelector(selectMylist);
 
   const base_url = "https://image.tmdb.org/t/p/original/";
 
@@ -57,68 +56,51 @@ function Row({
       return request;
     }
     fecthData();
-  }, [fetchUrl, movies]);
+  }, [fetchUrl]);
 
   return (
-    <>
-      {result ? (
-        <div className={c("row")}>
-          {modal && (
-            <Modal
-              movie={currentMovie}
-              title={title}
-              onClick={() => setModal(false)}
-            />
-          )}
-          <h2>Results for you</h2>
-          <div
-            className={c("row_posters", { isMyList, isTypeList })}
-            ref={rowRef}
-          >
-            {result.length >= 1 &&
-              result.map(
-                (movie, index) =>
-                  ((isLargeRow && movie.poster_path) ||
-                    (!isLargeRow && movie.backdrop_path)) && (
-                    <div className={c("inner")} key={movie.id}>
-                      <img
-                        className={c("row_poster", {
-                          row_posterLarge: isLargeRow,
-                        })}
-                        src={`${base_url}${
-                          isLargeRow ? movie.poster_path : movie.backdrop_path
-                        }`}
-                        alt={movie.name}
-                        onClick={() => openModal(movie)}
-                      />
-                      <p>{movie.name || movie.title}</p>
-                    </div>
-                  )
-              )}
-          </div>
-        </div>
-      ) : (
-        <div className={c("row")}>
-          {modal && (
-            <Modal
-              movie={currentMovie}
-              title={title}
-              onClick={() => setModal(false)}
-            />
-          )}
-          <h2>{title}</h2>
-          <div
-            className={c("row_posters", { isMyList, isTypeList })}
-            ref={rowRef}
-          >
-            {scrollLeft && !isMyList && !isTypeList && (
-              <FontAwesomeIcon
-                icon={faArrowCircleLeft}
-                className={c("icon-left")}
-                onMouseDown={handleScrollLeft}
-              />
-            )}
-            {mylist.length >= 1 &&
+    <div className={c("row")}>
+      {modal && (
+        <Modal
+          movie={currentMovie}
+          title={title}
+          onClick={() => setModal(false)}
+        />
+      )}
+      <h2>{result ? "Results for you" : title}</h2>
+      <div className={c("row_posters", { isMyList, isTypeList })} ref={rowRef}>
+        {scrollLeft && !isMyList && !isTypeList && (
+          <FontAwesomeIcon
+            icon={faArrowCircleLeft}
+            className={c("icon-left")}
+            onMouseDown={handleScrollLeft}
+          />
+        )}
+        {result ? (
+          result.length >= 1 &&
+          result.map(
+            (movie, index) =>
+              ((isLargeRow && movie.poster_path) ||
+                (!isLargeRow && movie.backdrop_path)) && (
+                <div className={c("inner")} key={movie.id}>
+                  <img
+                    className={c("row_poster", {
+                      row_posterLarge: isLargeRow,
+                    })}
+                    src={`${base_url}${
+                      isLargeRow ? movie.poster_path : movie.backdrop_path
+                    }`}
+                    alt={movie.name}
+                    onClick={() => openModal(movie)}
+                  />
+                  <p>{movie.name || movie.title}</p>
+                </div>
+              )
+          )
+        ) : (
+          <>
+            {mylist &&
+              mylist.length >= 1 &&
               isMyList &&
               mylist.map(
                 (movie, index) =>
@@ -160,17 +142,17 @@ function Row({
                     </div>
                   )
               )}
-            {scrollRight && !isMyList && !isTypeList && (
-              <FontAwesomeIcon
-                icon={faArrowCircleRight}
-                className={c("icon-right")}
-                onMouseDown={handleScrollRight}
-              />
-            )}
-          </div>
-        </div>
-      )}
-    </>
+          </>
+        )}
+        {scrollRight && !isMyList && !isTypeList && (
+          <FontAwesomeIcon
+            icon={faArrowCircleRight}
+            className={c("icon-right")}
+            onMouseDown={handleScrollRight}
+          />
+        )}
+      </div>
+    </div>
   );
 }
 

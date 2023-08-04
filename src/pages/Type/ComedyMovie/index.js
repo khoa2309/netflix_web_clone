@@ -9,15 +9,17 @@ function ComedyMovie() {
   return (
     <div>
       <Banner fetchUrl={requests.fetchComedyMovies} />
-      {result?.result?.length >= 1 ? (
-        <Row isTypeList result={result.result} isLargeRow />
+      {result && result.length >= 1 ? (
+        <Row isTypeList result={result} isLargeRow />
       ) : (
-        <Row
-          title="COMEDY MOVIES"
-          fetchUrl={requests.fetchComedyMovies}
-          isLargeRow
-          isTypeList
-        />
+        <>
+          <Row
+            title="COMEDY MOVIES"
+            fetchUrl={requests.fetchComedyMovies}
+            isLargeRow
+            isTypeList
+          />
+        </>
       )}
     </div>
   );

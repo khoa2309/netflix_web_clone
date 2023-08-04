@@ -13,7 +13,8 @@ import {
 import { useEffect, useRef, useState } from "react";
 import Dropdown from "./Dropdown";
 import { useDispatch } from "react-redux";
-import { getMovies } from "~/features/searchResults";
+import { clear, getMovies } from "~/features/searchResults";
+import { fill, restore } from "~/features/mylistSlice";
 
 const c = classNames.bind(styles);
 
@@ -78,12 +79,26 @@ function Nav({ path }) {
     }
   };
 
+  const handleMyList = (e, value) => {
+    e.preventDefault();
+    if (path === "/mylist") {
+      if (value === "") {
+        dispatch(restore());
+      } else {
+        dispatch(fill(value));
+      }
+    } else {
+      dispatch(getMovies(value));
+    }
+  };
+
   useEffect(() => {
     inputRef.current.value = "";
-    dispatch(getMovies(""));
+    dispatch(clear());
     setSearch(false);
     window.addEventListener("scroll", handleSroll);
     return () => window.removeEventListener("scroll", handleSroll);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [path]);
 
   return (
@@ -150,15 +165,12 @@ function Nav({ path }) {
       <nav className={c("second-nav")}>
         <form
           className={c("container", { open: search })}
-          onSubmit={(e) => {
-            e.preventDefault();
-            dispatch(getMovies(inputRef.current.value));
-          }}
+          onSubmit={(e) => handleMyList(e, inputRef.current.value)}
         >
           <input
             type="text"
             ref={inputRef}
-            onChange={(e) => dispatch(getMovies(e.target.value))}
+            onChange={(e) => handleMyList(e, e.target.value)}
           />
           <FontAwesomeIcon
             icon={faMagnifyingGlass}

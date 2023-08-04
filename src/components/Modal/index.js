@@ -14,6 +14,7 @@ import axios from "~/axios/axios";
 import { API_KEY } from "~/request/request";
 import { useDispatch, useSelector } from "react-redux";
 import { add, remove, selectMylist } from "~/features/mylistSlice";
+
 const c = classNames.bind(styles);
 
 function Modal({ movie, onClick, title = false }) {
@@ -21,13 +22,11 @@ function Modal({ movie, onClick, title = false }) {
   const [current, setCurrent] = useState(false);
   const mylist = useSelector(selectMylist);
   const dispatch = useDispatch();
+
   useEffect(() => {
     const isInclude = mylist.some((item) => item.id === movie.id);
-    if (isInclude) {
-      setCurrent(true);
-    } else {
-      setCurrent(false);
-    }
+    setCurrent(isInclude);
+
     async function getTrailer() {
       try {
         const response = await axios.get(
@@ -41,11 +40,20 @@ function Modal({ movie, onClick, title = false }) {
         return null;
       }
     }
+
     if (movie?.id) {
       getTrailer();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [mylist]);
+  }, [mylist, movie]);
+
+  const handleAddToMyList = () => {
+    if (current) {
+      dispatch(remove({ ...movie }));
+    } else {
+      dispatch(add({ ...movie }));
+    }
+  };
+
   return (
     <div className={c("modal")}>
       <div
@@ -77,21 +85,16 @@ function Modal({ movie, onClick, title = false }) {
                 <FontAwesomeIcon icon={faPlay} style={{ marginRight: 10 }} />
                 Phát
               </Button>
-              {current ? (
-                <FontAwesomeIcon
-                  icon={faCheck}
-                  className={c("btn-add")}
-                  title="Xóa khỏi danh sách của tôi"
-                  onClick={() => dispatch(remove({ ...movie }))}
-                />
-              ) : (
-                <FontAwesomeIcon
-                  icon={faAdd}
-                  className={c("btn-add")}
-                  title="Thêm vào danh sách của tôi"
-                  onClick={() => dispatch(add({ ...movie }))}
-                />
-              )}
+              <FontAwesomeIcon
+                icon={current ? faCheck : faAdd}
+                className={c("btn-add")}
+                title={
+                  current
+                    ? "Xóa khỏi danh sách của tôi"
+                    : "Thêm vào danh sách của tôi"
+                }
+                onClick={handleAddToMyList}
+              />
             </div>
             <div className={c("more-desc")}>
               <p className={c("like")}>

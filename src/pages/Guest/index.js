@@ -1,12 +1,15 @@
 import classNames from "classnames/bind";
 import styles from "./Guest.module.scss";
-import Story from "~/components/Story";
-import Signup from "~/components/Signup";
-import Footer from "~/components/Footer";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { selectUser } from "~/features/userSlice";
+
+import { lazy, Suspense } from "react";
+
+const Story = lazy(() => import("../../components/Story"));
+const Signup = lazy(() => import("../../components/Signup"));
+const Footer = lazy(() => import("../../components/Footer"));
 
 const c = classNames.bind(styles);
 
@@ -75,12 +78,14 @@ export default function Guest() {
           <Signup onlyForm />
         </div>
       </div>
-      <Story video={video[0]}></Story>
-      <Story image={image[0]}></Story>
-      <Story video={video[1]}></Story>
-      <Story image={image[1]}></Story>
-      <Signup withContact />
-      <Footer SignUp />
+      <Suspense fallback={<div>Loading...</div>}>
+        <Story video={video[0]}></Story>
+        <Story image={image[0]}></Story>
+        <Story video={video[1]}></Story>
+        <Story image={image[1]}></Story>
+        <Signup withContact />
+        <Footer SignUp />
+      </Suspense>
     </div>
   );
 }

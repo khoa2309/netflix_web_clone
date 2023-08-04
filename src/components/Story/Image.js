@@ -1,37 +1,36 @@
 import classNames from "classnames/bind";
 import styles from "./Story.module.scss";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 const c = classNames.bind(styles);
 
 function Image({ title, desc, imgURL, posterURL }) {
-  const [move_img, setMove_img] = useState(false);
+  const [moveImg, setMoveImg] = useState(false);
+  const rtlRef = useRef([]);
+
+  const handleScroll = useCallback(() => {
+    const isTrue = rtlRef.current.some((item) => {
+      return isInViewPort(item);
+    });
+    setMoveImg(isTrue);
+  }, []);
 
   useEffect(() => {
-    const el_img = [...document.querySelectorAll(".rtl")];
-
-    function handleScroll() {
-      const isTrue = el_img.some((item) => {
-        return isInViewPort(item);
-      });
-      if (isTrue) {
-        setMove_img(true);
-      } else {
-        setMove_img(false);
-      }
-    }
-    function isInViewPort(item) {
-      let rect = item.getClientRects()[0];
-      return !(rect.bottom < 50 || rect.top > window.innerHeight - 50);
-    }
-    window.addEventListener("scroll", handleScroll); // Xử lý khi cuộn trang
+    rtlRef.current = [...document.querySelectorAll(".rtl")];
+    window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [move_img]);
+  }, [handleScroll]);
+
+  const isInViewPort = (item) => {
+    let rect = item.getClientRects()[0];
+    return !(rect.bottom < 50 || rect.top > window.innerHeight - 50);
+  };
+
   return (
     <div className={c("image")}>
-      <div className={c("main", { start: move_img, rtl: true })}>
+      <div className={c("main", { start: moveImg, rtl: true })}>
         <img src={imgURL} alt="video" />
 
-        {posterURL ? (
+        {posterURL && (
           <div className={c("card")}>
             <div className={c("poster")}>
               <img src={posterURL} alt="" />
@@ -42,10 +41,10 @@ function Image({ title, desc, imgURL, posterURL }) {
             </div>
             <div className={c("animation")}></div>
           </div>
-        ) : null}
+        )}
       </div>
 
-      <div className={c("sub", { start: move_img })}>
+      <div className={c("sub", { start: moveImg })}>
         <h1>{title}</h1>
         <p>{desc}</p>
       </div>

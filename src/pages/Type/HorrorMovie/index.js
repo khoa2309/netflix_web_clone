@@ -9,15 +9,17 @@ function HorrorMovie() {
   return (
     <div>
       <Banner fetchUrl={requests.fetchHorrorMovies} />
-      {result?.result?.length >= 1 ? (
-        <Row isTypeList result={result.result} isLargeRow />
+      {result && result.length >= 1 ? (
+        <Row isTypeList result={result} isLargeRow />
       ) : (
-        <Row
-          title="HORROR MOVIES"
-          fetchUrl={requests.fetchHorrorMovies}
-          isLargeRow
-          isTypeList
-        />
+        <>
+          <Row
+            title="HORROR MOVIES"
+            fetchUrl={requests.fetchHorrorMovies}
+            isLargeRow
+            isTypeList
+          />
+        </>
       )}
     </div>
   );

@@ -6,25 +6,18 @@ const c = classNames.bind(styles);
 
 function Dropdown({ item, dropdown = false, path, onClick }) {
   return (
-    <ul
-      className={c("dropdown", {
-        show: dropdown,
-      })}
-    >
-      {item.map((item, index) => {
-        if (item.link === path) {
-          item.isActive = true;
-        } else {
-          item.isActive = false;
-        }
+    <ul className={c("dropdown", { show: dropdown })}>
+      {item.map((menu) => {
+        const isActive = menu.link === path;
         return (
-          <li title={item.title} key={index}>
+          <li key={menu.title}>
             <Link
-              to={item.link}
-              className={c({ active: item.isActive })}
+              to={menu.link}
+              className={c({ active: isActive })}
               onClick={onClick}
+              title={menu.title}
             >
-              {item.title}
+              {menu.title}
             </Link>
           </li>
         );

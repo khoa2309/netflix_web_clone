@@ -3,22 +3,10 @@ import Image from "./Image";
 
 function Story({ video, image, ...props }) {
   if (video) {
-    const { title, desc, imgURL, videoURL, fit } = video;
-    return (
-      <Video
-        title={title}
-        desc={desc}
-        imgURL={imgURL}
-        videoURL={videoURL}
-        fit={fit}
-      />
-    );
+    return <Video {...video} {...props} />;
   }
   if (image) {
-    const { title, desc, imgURL, posterURL } = image;
-    return (
-      <Image title={title} desc={desc} imgURL={imgURL} posterURL={posterURL} />
-    );
+    return <Image {...image} {...props} />;
   }
 }
 

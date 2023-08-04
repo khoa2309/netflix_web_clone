@@ -9,8 +9,8 @@ export default function Home() {
   return (
     <div>
       <Banner fetchUrl={requests.fetchTrending} isTrending />
-      {result?.result?.length >= 1 ? (
-        <Row isTypeList result={result.result} isLargeRow />
+      {result && result.length >= 1 ? (
+        <Row isTypeList result={result} isLargeRow />
       ) : (
         <>
           <Row

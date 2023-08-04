@@ -16,11 +16,11 @@
 }
 .isMyList {
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 5px;
   row-gap: 50px;
   margin: 3rem 0;
   p {
-    max-width: 280px;
+    max-width: 260px;
   }
 }
 .row_posters::-webkit-scrollbar {

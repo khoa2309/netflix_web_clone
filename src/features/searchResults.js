@@ -17,7 +17,11 @@ export const resultSlide = createSlice({
     result: null,
     error: null,
   },
-  reducers: {},
+  reducers: {
+    clear: (state, action) => {
+      state.result = [];
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getMovies.pending, (state) => {
@@ -36,6 +40,6 @@ export const resultSlide = createSlice({
 
 export const { clear } = resultSlide.actions;
 
-export const selectResult = (state) => state.result;
+export const selectResult = (state) => state.result.result;
 
 export default resultSlide.reducer;

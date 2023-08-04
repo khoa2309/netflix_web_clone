@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useCallback } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 import classNames from "classnames/bind";
@@ -16,64 +16,73 @@ function Signup({ onlyForm, withContact }) {
   const [message, setMessage] = useState("Bạn cần nhập email");
   const inputRef = useRef(null);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const isEmail = (value) => {
+  const isEmail = useCallback((value) => {
     let check = false;
     const re =
       // eslint-disable-next-line no-useless-escape
       /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
     re.test(value) ? (check = true) : (check = false);
     return check;
-  };
+  }, []);
 
-  const navigate = useNavigate();
-  const handleClick = (e) => {
-    e.preventDefault();
-    inputRef.current.focus();
-    if (value) {
-      if (!isEmail(value)) {
-        setMessage("Email không hợp lệ!!");
+  const handleClick = useCallback(
+    (e) => {
+      e.preventDefault();
+      inputRef.current.focus();
+      if (value) {
+        if (!isEmail(value)) {
+          setMessage("Email không hợp lệ!!");
+          document.getElementById("error-span").style.visibility = "visible";
+          document.getElementById("wrapper").style.borderColor = "red";
+        } else {
+          document.getElementById("error-span").style.visibility = "hidden";
+          document.getElementById("wrapper").style.borderColor = "green";
+          dispatch(setcurrValue(value));
+          navigate("/login");
+        }
+        if (value.search("@") === -1) {
+          setMessage("Bạn cần nhập email");
+        }
+      } else {
         document.getElementById("error-span").style.visibility = "visible";
         document.getElementById("wrapper").style.borderColor = "red";
+      }
+    },
+    [dispatch, isEmail, navigate, value]
+  );
+
+  const handleClickContact = useCallback(
+    (e) => {
+      e.preventDefault();
+      inputRef.current.focus();
+      if (value) {
+        if (!isEmail(value)) {
+          setMessage("Email không hợp lệ!!");
+          document.getElementById("error-span-contact").style.visibility =
+            "visible";
+          document.getElementById("wrapper-contact").style.borderColor = "red";
+        } else {
+          document.getElementById("error-span-contact").style.visibility =
+            "hidden";
+          document.getElementById("wrapper-contact").style.borderColor =
+            "green";
+          dispatch(setcurrValue(value));
+          navigate("/login");
+        }
+        if (value.search("@") === -1) {
+          setMessage("Bạn cần nhập email");
+        }
       } else {
-        document.getElementById("error-span").style.visibility = "hidden";
-        document.getElementById("wrapper").style.borderColor = "green";
-        dispatch(setcurrValue(value));
-        navigate("/login");
-      }
-      if (value.search("@") === -1) {
-        setMessage("Bạn cần nhập email");
-      }
-    } else {
-      document.getElementById("error-span").style.visibility = "visible";
-      document.getElementById("wrapper").style.borderColor = "red";
-    }
-  };
-  const handleClickContact = (e) => {
-    e.preventDefault();
-    inputRef.current.focus();
-    if (value) {
-      if (!isEmail(value)) {
-        setMessage("Email không hợp lệ!!");
         document.getElementById("error-span-contact").style.visibility =
           "visible";
         document.getElementById("wrapper-contact").style.borderColor = "red";
-      } else {
-        document.getElementById("error-span-contact").style.visibility =
-          "hidden";
-        document.getElementById("wrapper-contact").style.borderColor = "green";
-        dispatch(setcurrValue(value));
-        navigate("/login");
       }
-      if (value.search("@") === -1) {
-        setMessage("Bạn cần nhập email");
-      }
-    } else {
-      document.getElementById("error-span-contact").style.visibility =
-        "visible";
-      document.getElementById("wrapper-contact").style.borderColor = "red";
-    }
-  };
+    },
+    [dispatch, isEmail, navigate, value]
+  );
+
   if (onlyForm) {
     return (
       <form className={c("signup")}>
@@ -94,7 +103,12 @@ function Signup({ onlyForm, withContact }) {
           </span>
           <div className={c("wrapper")} id="wrapper"></div>
         </div>
-        <Button signup to={config.routes.login} onClick={handleClick}>
+        <Button
+          signup
+          to={config.routes.login}
+          onClick={handleClick}
+          ismemoized="true"
+        >
           Bắt đầu
         </Button>
       </form>
@@ -122,7 +136,12 @@ function Signup({ onlyForm, withContact }) {
             </span>
             <div className={c("wrapper")} id="wrapper-contact"></div>
           </div>
-          <Button signup to={config.routes.login} onClick={handleClickContact}>
+          <Button
+            signup
+            to={config.routes.login}
+            onClick={handleClickContact}
+            ismemoized="true"
+          >
             Bắt đầu
           </Button>
         </form>

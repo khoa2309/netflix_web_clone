@@ -9,15 +9,17 @@ function DocumentariesMovie() {
   return (
     <div>
       <Banner fetchUrl={requests.fetchDocumentaries} />
-      {result?.result?.length >= 1 ? (
-        <Row isTypeList result={result.result} isLargeRow />
+      {result && result.length >= 1 ? (
+        <Row isTypeList result={result} isLargeRow />
       ) : (
-        <Row
-          title="DOCUMENTARIES MOVIES"
-          fetchUrl={requests.fetchDocumentaries}
-          isLargeRow
-          isTypeList
-        />
+        <>
+          <Row
+            title="DOCUMENTARIES MOVIES"
+            fetchUrl={requests.fetchDocumentaries}
+            isLargeRow
+            isTypeList
+          />
+        </>
       )}
     </div>
   );

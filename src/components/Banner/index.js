@@ -94,7 +94,9 @@ function Banner({ fetchUrl, isTrending = false }) {
         <button>
           <img src={img.video_actions.default} alt="action"></img>
         </button>
-        <span>Hiện chưa có chức năng xem trailer</span>
+        <span>
+          Hiện tại chỉ xem được trailer, chúng tôi chưa sở hữu source phim
+        </span>
       </div>
       <div className={c("fade-Bottom")}></div>
     </section>

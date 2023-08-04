@@ -22,7 +22,7 @@ function Profile() {
         <div className={c("profile__details")}>
           <h2>{user?.email}</h2>
           <div className={c("profile__plans")}>
-            <h3>Plans</h3>
+            <h3>Planning</h3>
             <Button
               SignOut
               onClick={() => {

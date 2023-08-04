@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import classNames from "classnames/bind";
 import styles from "./Question.module.scss";
 
@@ -8,36 +8,29 @@ function Question({ data }) {
   const { question, answer } = data;
   const [isAnswerVisible, setIsAnswerVisible] = useState(false);
   const [scale, setScale] = useState(false);
+  const questionRef = useRef(null);
+
+  const handleScroll = useCallback(() => {
+    const isInViewPort = () => {
+      const element = questionRef.current;
+      if (!element) return false;
+      const rect = element.getBoundingClientRect();
+      return !(rect.bottom < 0 || rect.top > window.innerHeight);
+    };
+    setScale(isInViewPort());
+  }, []);
 
   useEffect(() => {
-    const el_question = [...document.querySelectorAll(".animated")];
-
-    function handleScroll() {
-      const isTrue = el_question.some((item) => {
-        return isInViewPort(item);
-      });
-      if (isTrue) {
-        setScale(true);
-      } else {
-        setScale(false);
-      }
-    }
-    function isInViewPort(item) {
-      let rect = item.getClientRects()[0];
-      return !(rect.bottom < 0 || rect.top > window.innerHeight);
-    }
-    window.addEventListener("scroll", handleScroll); // Xử lý khi cuộn trang
+    window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [scale]);
+  }, [handleScroll]);
 
-  const handleClick = () => {
-    setIsAnswerVisible(!isAnswerVisible);
-  };
   return (
     <div className={c("wrapper")}>
       <div
-        className={c("question", { start: scale, animated: true })}
-        onClick={handleClick}
+        ref={questionRef}
+        className={c("question", { start: scale })}
+        onClick={() => setIsAnswerVisible(!isAnswerVisible)}
       >
         {question}
       </div>

@@ -5,23 +5,26 @@ import { Link } from "react-router-dom";
 import config from "~/config";
 import Button from "~/components/Button";
 import { useNavigate } from "react-router-dom";
+import React from "react";
 
 const c = classNames.bind(styles);
 
-export default function Header({ path }) {
+function Header({ path }) {
   const navigate = useNavigate();
   return (
     <header className={c("inner")}>
       <Link to={config.routes.guest}>
         <img src={img.logo.default} alt="Netflix" />
       </Link>
-      {path === "/" ? (
+      {path === "/" && (
         <div className={c("actions")}>
           <Button login onClick={() => navigate("/login")}>
             Đăng nhập
           </Button>
         </div>
-      ) : null}
+      )}
     </header>
   );
 }
+
+export default React.memo(Header);
