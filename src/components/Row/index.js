@@ -99,9 +99,7 @@ function Row({
           )
         ) : (
           <>
-            {mylist &&
-              mylist.length >= 1 &&
-              isMyList &&
+            {isMyList &&
               mylist.map(
                 (movie, index) =>
                   ((isLargeRow && movie.poster_path) ||
