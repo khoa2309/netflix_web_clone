@@ -3,7 +3,7 @@ import classNames from "classnames/bind";
 import styles from "./Form.module.scss";
 import Button from "../Button";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import {
   auth,
   createUserWithEmailAndPassword,
@@ -20,6 +20,7 @@ function Form() {
   const [show, setShow] = useState(false);
   const [toggle, setToggle] = useState(true);
   const [email, setEmail] = useState(currentEmail);
+  const check = useRef(null);
   const [password, setPassword] = useState("");
   const register = (e) => {
     e.preventDefault();
@@ -84,7 +85,7 @@ function Form() {
         </Button>
       )}
       <div className={c("memory")}>
-        <input type="checkbox" name="checkbox" id="checkbox" />
+        <input type="checkbox" name="checkbox" id="checkbox" ref={check} />
         <label htmlFor="checkbox" className={c("my-label")}>
           Ghi nhớ tôi
         </label>

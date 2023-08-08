@@ -12,15 +12,11 @@ function Video({ title, desc, imgURL, videoURL, fit }) {
       </div>
       <div className={c("main")}>
         <img src={imgURL} alt="video" />
-        <video
-          autoPlay
-          playsInline
-          muted
-          loop
-          className={c(fit ? "fit" : "unfit")}
-        >
-          <source src={videoURL} type="video/mp4"></source>
-        </video>
+        <div className={c(fit ? "fit" : "unfit")}>
+          <video autoPlay playsInline muted loop>
+            <source src={videoURL} type="video/mp4"></source>
+          </video>
+        </div>
       </div>
     </div>
   );
