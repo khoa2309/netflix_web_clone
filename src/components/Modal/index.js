@@ -1,5 +1,5 @@
+import React, { useState, useEffect } from "react";
 import classNames from "classnames/bind";
-import styles from "./Modal.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faAdd,
@@ -9,23 +9,27 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import Button from "../Button";
 import img from "~/assets";
-import { useEffect, useState } from "react";
 import axios from "~/axios/axios";
 import { API_KEY } from "~/request/request";
 import { useDispatch, useSelector } from "react-redux";
 import { add, remove, selectMylist } from "~/features/mylistSlice";
+import Trailer from "../Trailer";
+import styles from "./Modal.module.scss";
 
 const c = classNames.bind(styles);
 
-function Modal({ movie, onClick, title = false }) {
+function Modal({ movie, title, onClick }) {
   const [trailer, setTrailer] = useState("");
-  const [current, setCurrent] = useState(false);
+  const [isCurrent, setIsCurrent] = useState(false);
+  const [showNotice, setShowNotice] = useState(false);
+  const [showTrailer, setShowTrailer] = useState(false);
+
   const mylist = useSelector(selectMylist);
   const dispatch = useDispatch();
 
   useEffect(() => {
     const isInclude = mylist.some((item) => item.id === movie.id);
-    setCurrent(isInclude);
+    setIsCurrent(isInclude);
 
     async function getTrailer() {
       try {
@@ -46,21 +50,29 @@ function Modal({ movie, onClick, title = false }) {
     }
   }, [mylist, movie]);
 
-  const handleAddToMyList = () => {
-    if (current) {
-      dispatch(remove({ ...movie }));
-    } else {
-      dispatch(add({ ...movie }));
-    }
+  const toggleAddToMyList = () => {
+    const action = isCurrent ? remove : add;
+    dispatch(action({ ...movie }));
   };
 
-  return (
-    <div className={c("modal")}>
-      <div
-        className={c("content", {
-          small: !!!movie.backdrop_path,
-        })}
-      >
+  const renderNotice = () => {
+    return (
+      <p className={c("notice")}>
+        This movie has no trailer, please choose another movie
+        <Button login onClick={() => setShowNotice(false)}>
+          OK
+        </Button>
+      </p>
+    );
+  };
+
+  const renderTrailer = () => {
+    return <Trailer trailer={trailer} onClick={() => setShowTrailer(false)} />;
+  };
+
+  const renderContent = () => {
+    return (
+      <div className={c("content", { small: !!!movie.backdrop_path })}>
         <div className={c("inner")}>
           <FontAwesomeIcon
             icon={faClose}
@@ -77,23 +89,27 @@ function Modal({ movie, onClick, title = false }) {
           <div className={c("title-logo")}>
             <h1>{movie?.title || movie?.original_title || movie?.name}</h1>
             <div className={c("actions")}>
-              <Button
-                play
-                href={`https://www.youtube.com/watch?v=${trailer}` || null}
-                target="_blank"
-              >
-                <FontAwesomeIcon icon={faPlay} style={{ marginRight: 10 }} />
-                Phát
-              </Button>
+              {trailer ? (
+                <Button play onClick={() => setShowTrailer(true)}>
+                  <FontAwesomeIcon icon={faPlay} style={{ marginRight: 10 }} />
+                  Phát
+                </Button>
+              ) : (
+                <Button play onClick={() => setShowNotice(true)}>
+                  <FontAwesomeIcon icon={faPlay} style={{ marginRight: 10 }} />
+                  Phát
+                </Button>
+              )}
+
               <FontAwesomeIcon
-                icon={current ? faCheck : faAdd}
+                icon={isCurrent ? faCheck : faAdd}
                 className={c("btn-add")}
                 title={
-                  current
+                  isCurrent
                     ? "Xóa khỏi danh sách của tôi"
                     : "Thêm vào danh sách của tôi"
                 }
-                onClick={handleAddToMyList}
+                onClick={toggleAddToMyList}
               />
             </div>
             <div className={c("more-desc")}>
@@ -115,7 +131,15 @@ function Modal({ movie, onClick, title = false }) {
           </div>
         </div>
       </div>
-    </div>
+    );
+  };
+
+  return (
+    <>
+      {showNotice && renderNotice()}
+      {showTrailer && renderTrailer()}
+      <div className={c("modal")}>{renderContent()}</div>
+    </>
   );
 }
 

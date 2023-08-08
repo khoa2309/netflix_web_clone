@@ -14,6 +14,9 @@
   width: 36%;
   z-index: 10;
   text-shadow: 2px 2px 4px black;
+  p {
+    width: 600px;
+  }
   .title-logo {
     h1 {
       font-size: 40px;
@@ -81,7 +84,7 @@
 
 .fade-Bottom {
   position: absolute;
-  min-height: 100%;
+  min-height: 101%;
   background-image: linear-gradient(
     180deg,
     transparent,
@@ -90,4 +93,23 @@
   );
   right: 0;
   left: 0;
+}
+
+.notice {
+  background-color: rgba(35, 35, 35, 0.6);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-size: x-large;
+  font-weight: 700;
+  gap: 2rem;
 }

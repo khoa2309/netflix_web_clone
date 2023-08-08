@@ -2,19 +2,44 @@ import classNames from "classnames/bind";
 import styles from "./Banner.module.scss";
 import img from "~/assets";
 import Button from "../Button";
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import axios from "~/axios/axios";
 import { API_KEY } from "~/request/request";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInfoCircle, faPlay } from "@fortawesome/free-solid-svg-icons";
 import Modal from "../Modal";
+import Trailer from "../Trailer";
+import React from "react";
 
 const c = classNames.bind(styles);
 
 function Banner({ fetchUrl, isTrending = false }) {
   const [movie, setMovie] = useState([]);
-  const [modal, setModal] = useState(false);
   const [trailer, setTrailer] = useState("");
+  const [displayMode, setDisplayMode] = useState("none");
+
+  const handleModalDismiss = () => {
+    setDisplayMode("none");
+  };
+
+  const handlePlayButtonClick = () => {
+    if (trailer) {
+      setDisplayMode("inner");
+    } else {
+      setDisplayMode("notice");
+    }
+  };
+
+  const handleMoreDescButtonClick = () => {
+    setDisplayMode("modal");
+  };
+  const handleNoticeDismiss = () => {
+    setDisplayMode("none");
+  };
+
+  const handleInnerDismiss = () => {
+    setDisplayMode("none");
+  };
 
   useEffect(() => {
     async function fecthData() {
@@ -55,11 +80,23 @@ function Banner({ fetchUrl, isTrending = false }) {
         backgroundRepeat: "no-repeat",
       }}
     >
-      {modal && (
+      {displayMode === "notice" && (
+        <p className={c("notice")}>
+          This movie has no trailer, please choose another movie
+          <Button login onClick={handleNoticeDismiss}>
+            OK
+          </Button>
+        </p>
+      )}
+
+      {displayMode === "inner" && (
+        <Trailer trailer={trailer} onClick={handleInnerDismiss} />
+      )}
+      {displayMode === "modal" && (
         <Modal
           movie={movie}
           title={"TRENDING NOW"}
-          onClick={() => setModal(false)}
+          onClick={handleModalDismiss}
         />
       )}
       <section className={c("content")}>
@@ -76,15 +113,12 @@ function Banner({ fetchUrl, isTrending = false }) {
         )}
         <p>{movie?.overview}</p>
         <div className={c("actions")}>
-          <Button
-            play
-            href={`https://www.youtube.com/watch?v=${trailer}` || null}
-            target="_blank"
-          >
+          <Button play onClick={handlePlayButtonClick}>
             <FontAwesomeIcon icon={faPlay} style={{ marginRight: 10 }} />
             Phát
           </Button>
-          <Button moreDesc onClick={() => setModal(true)}>
+
+          <Button moreDesc onClick={handleMoreDescButtonClick}>
             Thông tin khác
             <FontAwesomeIcon icon={faInfoCircle} style={{ marginLeft: 10 }} />
           </Button>
@@ -103,4 +137,4 @@ function Banner({ fetchUrl, isTrending = false }) {
   );
 }
 
-export default Banner;
+export default React.memo(Banner);
