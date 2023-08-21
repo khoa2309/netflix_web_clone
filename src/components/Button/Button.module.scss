@@ -1,0 +1,78 @@
+.wrapper {
+  background: rgb(229, 9, 20);
+  color: var(--tx-color);
+  cursor: pointer;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+}
+
+.login {
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 10px 15px;
+  border-radius: 25px;
+  transition: 0.3s;
+  &:hover {
+    background-color: rgb(160, 13, 20);
+  }
+  &.large {
+    width: 100%;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: 700;
+    margin: 24px 0 12px;
+    padding: 16px;
+  }
+}
+.signup {
+  margin-left: 10px;
+  height: 55px;
+  user-select: none;
+  font-size: 1.5rem;
+  font-weight: 500;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.25rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &:hover {
+    background-color: rgb(160, 13, 20);
+  }
+}
+
+.play {
+  background-color: var(--tx-color);
+  color: var(--bg-color);
+  padding: 0.7rem 2.4rem;
+  border-radius: 4px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-shadow: none;
+  &:hover {
+    transform: scale(1.2);
+  }
+}
+
+.moreDesc {
+  background-color: rgba(109, 109, 110, 0.7);
+  color: var(--tx-color);
+  font-size: 1.1rem;
+  font-weight: 700;
+  border-radius: 4px;
+  padding: 0.7rem 2.4rem;
+  margin-left: 20px;
+  &:hover {
+    transform: scale(1.1);
+  }
+}
+
+.SignOut {
+  padding: 10px 20px;
+  font-size: 1rem;
+  margin-top: 5%;
+  width: 100%;
+  font-weight: 700;
+}

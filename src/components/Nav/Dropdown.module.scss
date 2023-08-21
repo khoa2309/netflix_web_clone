@@ -1,0 +1,22 @@
+.dropdown {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 60px;
+  left: 35%;
+  background-color: black;
+  opacity: 0;
+  pointer-events: none;
+  &.show {
+    pointer-events: all;
+    opacity: 1;
+  }
+  li {
+    padding: 10px 15px;
+  }
+}
+a.active {
+  color: var(--tx-color);
+  font-weight: 800;
+  font-size: 18px;
+}

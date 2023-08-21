@@ -1,0 +1,87 @@
+.row_posters {
+  position: relative;
+  display: flex;
+  overflow-y: hidden;
+  overflow-x: scroll;
+  scroll-behavior: smooth;
+  padding: 20px;
+}
+.isTypeList {
+  flex-wrap: wrap;
+  justify-content: center;
+  row-gap: 50px;
+  p {
+    max-width: 280px;
+  }
+}
+.isMyList {
+  flex-wrap: wrap;
+  gap: 5px;
+  row-gap: 50px;
+  margin: 3rem 0;
+  p {
+    max-width: 260px;
+  }
+}
+.row_posters::-webkit-scrollbar {
+  display: none;
+}
+.inner {
+  display: flex;
+  flex-direction: column;
+  .row_poster {
+    border-radius: 5px;
+    object-fit: contain;
+    margin-right: 10px;
+    max-height: 200px;
+    transition: transform 450ms;
+    &:hover {
+      transform: scale(1.08);
+      opacity: 1;
+    }
+  }
+  .row_posterLarge {
+    max-height: 400px;
+    &:hover {
+      transform: scale(1.09);
+      opacity: 1;
+    }
+  }
+  p {
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-top: 10px;
+    transition: all 0.3s;
+  }
+  &:hover p {
+    color: red;
+  }
+}
+
+.icon-left {
+  position: sticky;
+  height: 35px;
+  left: 0;
+  top: 50%;
+  cursor: pointer;
+  transform: translateY(-85%);
+  z-index: 20;
+  transition: all 0.2s;
+  &:hover {
+    transform: scale(1.2) translateY(-85%);
+  }
+}
+.icon-right {
+  position: sticky;
+  height: 35px;
+  right: 0;
+  cursor: pointer;
+  top: 50%;
+  transform: translateY(-85%);
+  z-index: 20;
+  transition: all 0.2s;
+  &:hover {
+    transform: scale(1.2) translateY(-85%);
+  }
+}
