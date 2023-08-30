@@ -22,18 +22,23 @@ function Form() {
   const [email, setEmail] = useState(currentEmail);
   const check = useRef(null);
   const [password, setPassword] = useState("");
+  const [passwordRequired, setPasswordRequired] = useState("");
   const register = (e) => {
     e.preventDefault();
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        alert(
-          "Chúc mừng " + userCredential.user.email + " đã đăng ký thành công"
-        );
-        setToggle(!toggle);
-      })
-      .catch((error) => {
-        alert(error.message.slice(10, error.length));
-      });
+    if (password === passwordRequired) {
+      createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          alert(
+            "Chúc mừng " + userCredential.user.email + " đã đăng ký thành công"
+          );
+          setToggle(!toggle);
+        })
+        .catch((error) => {
+          alert(error.message.slice(10, error.length));
+        });
+    } else {
+      alert("Mật khẩu không khớp");
+    }
   };
 
   const login = (e) => {
@@ -75,6 +80,20 @@ function Form() {
         />
         <label htmlFor="password-input">Mật khẩu</label>
       </div>
+      {!toggle && (
+        <div className={c("password")}>
+          <input
+            value={passwordRequired}
+            type="password"
+            name="password-required"
+            id="password-input-xn"
+            minLength={4}
+            maxLength={60}
+            onChange={(e) => setPasswordRequired(e.target.value)}
+          />
+          <label htmlFor="password-input-xn">Xác nhận mật khẩu</label>
+        </div>
+      )}
       {toggle ? (
         <Button login large onClick={login}>
           Đăng nhập
