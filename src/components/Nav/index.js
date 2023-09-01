@@ -5,7 +5,6 @@ import classNames from "classnames/bind";
 import styles from "./Nav.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faBell,
   faCaretDown,
   faCaretRight,
   faMagnifyingGlass,
@@ -183,13 +182,14 @@ function Nav({ path }) {
             }}
           />
         </form>
-
-        <FontAwesomeIcon icon={faBell} className={c("icon")} />
         <div className={c("avatar")}>
           <img
             src="https://occ-0-395-55.1.nflxso.net/dnm/api/v6/K6hjPJd6cR6FpVELC5Pd6ovHRSk/AAAABYNwAakf94HfoVx6gz2x8vcyNJa3tTYZPqdyGDJ93nPbawb7vDV7U60_-S5D6yxeDBw1LcQVb01i60Qpgtot-BiSKM179cXngQ.png?r=962"
             alt="avt"
-            onClick={() => navigate("/profile")}
+            onClick={() => {
+              setDropdown(false);
+              navigate("/profile");
+            }}
           />
         </div>
       </nav>

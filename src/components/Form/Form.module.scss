@@ -1,9 +1,10 @@
 .wrapper {
   width: 450px;
-  height: 650px;
+  min-height: 650px;
   border-radius: 4px;
   background-color: rgba(0, 0, 0, 0.75);
   padding: 60px 68px 40px;
+  will-change: transform;
   h1 {
     font-size: 32px;
     font-weight: 500;

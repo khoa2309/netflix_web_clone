@@ -61,12 +61,16 @@
   justify-content: center;
   display: flex;
   align-items: center;
+  gap: 5px;
   border-bottom: 8px solid #232323;
   overflow-x: hidden;
   overflow-y: hidden;
   will-change: transform;
   .sub {
+    display: none;
     width: 50%;
+    z-index: 1;
+    animation: rightToLeft 0.5s linear forwards;
     h1 {
       margin: 0;
       font-size: 3rem;
@@ -77,13 +81,12 @@
       font-weight: 400;
       margin: 1rem 0 0;
     }
-    &.start {
-      animation: rightToLeft 0.5s linear forwards;
-    }
   }
   .main {
+    display: none;
     position: relative;
     width: 50%;
+    animation: leftToRight 0.5s linear forwards;
     .card {
       width: 60%;
       height: 25%;
@@ -137,9 +140,15 @@
         flex-shrink: 0;
       }
     }
-    &.start {
-      animation: leftToRight 0.5s linear forwards;
-    }
+  }
+}
+
+.image.start {
+  .main {
+    display: block;
+  }
+  .sub {
+    display: block;
   }
 }
 

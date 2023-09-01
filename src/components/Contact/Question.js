@@ -11,13 +11,10 @@ function Question({ data }) {
   const questionRef = useRef(null);
 
   const handleScroll = useCallback(() => {
-    const isInViewPort = () => {
-      const element = questionRef.current;
-      if (!element) return false;
-      const rect = element.getBoundingClientRect();
-      return !(rect.bottom < 0 || rect.top > window.innerHeight);
-    };
-    setScale(isInViewPort());
+    const isTrue = isInViewPort(questionRef.current);
+    if (isTrue) {
+      setScale(isTrue);
+    }
   }, []);
 
   useEffect(() => {
@@ -25,11 +22,15 @@ function Question({ data }) {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [handleScroll]);
 
+  const isInViewPort = (item) => {
+    let rect = item.getClientRects()[0];
+    return !(rect.bottom < 50 || rect.top > window.innerHeight - 50);
+  };
+
   return (
-    <div className={c("wrapper")}>
+    <div className={c("wrapper", { start: scale })} ref={questionRef}>
       <div
-        ref={questionRef}
-        className={c("question", { start: scale })}
+        className={c("question")}
         onClick={() => setIsAnswerVisible(!isAnswerVisible)}
       >
         {question}

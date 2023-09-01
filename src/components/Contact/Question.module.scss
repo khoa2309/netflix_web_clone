@@ -9,11 +9,10 @@
     font-weight: 400;
     padding: 24px;
     background-color: #2d2d2d;
+    animation: scale 0.5s linear forwards;
+    display: none;
     &:hover {
       background-color: rgb(78, 78, 78);
-    }
-    &.start {
-      animation: scale 0.5s linear forwards;
     }
   }
   .answer {
@@ -24,11 +23,16 @@
     font-size: 2rem;
     font-weight: 400;
     padding: 24px;
-
     &.show {
       display: block;
       animation: show 0.5s ease-in-out forwards;
     }
+  }
+}
+
+.wrapper.start {
+  .question {
+    display: block;
   }
 }
 

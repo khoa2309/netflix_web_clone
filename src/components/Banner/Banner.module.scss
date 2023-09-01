@@ -84,7 +84,7 @@
 
 .fade-Bottom {
   position: absolute;
-  min-height: 101%;
+  min-height: calc(100% + 1px);
   background-image: linear-gradient(
     180deg,
     transparent,

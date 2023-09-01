@@ -5,17 +5,16 @@ const c = classNames.bind(styles);
 
 function Image({ title, desc, imgURL, posterURL }) {
   const [moveImg, setMoveImg] = useState(false);
-  const rtlRef = useRef([]);
+  const animationRef = useRef(null);
 
   const handleScroll = useCallback(() => {
-    const isTrue = rtlRef.current.some((item) => {
-      return isInViewPort(item);
-    });
-    setMoveImg(isTrue);
+    const isTrue = isInViewPort(animationRef.current);
+    if (isTrue) {
+      setMoveImg(isTrue);
+    }
   }, []);
 
   useEffect(() => {
-    rtlRef.current = [...document.querySelectorAll(".rtl")];
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, [handleScroll]);
@@ -26,8 +25,8 @@ function Image({ title, desc, imgURL, posterURL }) {
   };
 
   return (
-    <div className={c("image")}>
-      <div className={c("main", { start: moveImg, rtl: true })}>
+    <div className={c("image", { start: moveImg })} ref={animationRef}>
+      <div className={c("main")}>
         <img src={imgURL} alt="video" />
 
         {posterURL && (
@@ -44,7 +43,7 @@ function Image({ title, desc, imgURL, posterURL }) {
         )}
       </div>
 
-      <div className={c("sub", { start: moveImg })}>
+      <div className={c("sub")}>
         <h1>{title}</h1>
         <p>{desc}</p>
       </div>
