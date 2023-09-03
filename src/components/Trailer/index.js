@@ -7,7 +7,7 @@ const c = classNames.bind(styles);
 
 function Trailer({ trailer, onClick }) {
   return (
-    <div className={c("iframe")}>
+    <div className={c("iframe")} onClick={onClick}>
       <div className={c("iframe-wrap")}>
         <iframe
           className={c("video")}
