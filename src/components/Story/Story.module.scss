@@ -1,0 +1,207 @@
+.video {
+  height: 80vh;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  border-bottom: 8px solid #232323;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  padding: 0 5rem;
+
+  .sub {
+    width: 50%;
+
+    h1 {
+      margin: 0;
+      font-size: 3rem;
+      font-weight: 900;
+    }
+
+    p {
+      font-size: 1.5rem;
+      font-weight: 400;
+      margin: 1rem 0 0;
+    }
+  }
+
+  .main {
+    width: 50%;
+    position: relative;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .fit {
+      position: absolute;
+      z-index: -1;
+      top: 20%;
+      left: 13%;
+      overflow: hidden;
+
+      video {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+    }
+
+    .unfit {
+      position: absolute;
+      z-index: -1;
+      top: 10%;
+      left: 20%;
+      right: 20%;
+      overflow: hidden;
+
+      video {
+        max-width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+    }
+  }
+}
+
+.image {
+  height: 80vh;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  border-bottom: 8px solid #232323;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  will-change: transform;
+
+  .sub {
+    display: none;
+    width: 50%;
+    z-index: 1;
+    animation: rightToLeft 0.5s linear forwards;
+
+    h1 {
+      margin: 0;
+      font-size: 3rem;
+      font-weight: 900;
+    }
+
+    p {
+      font-size: 1.5rem;
+      font-weight: 400;
+      margin: 1rem 0 0;
+    }
+  }
+
+  .main {
+    display: none;
+    position: relative;
+    width: 50%;
+    animation: leftToRight 0.5s linear forwards;
+    text-align: center;
+
+    .card {
+      width: 60%;
+      height: 25%;
+      display: flex;
+      align-items: center;
+      position: absolute;
+      border: 2px solid rgba(128, 128, 128, 0.7);
+      box-shadow: 0 0 2em 0 rgb(0, 0, 0);
+      border-radius: 0.75rem;
+      background-color: black;
+      z-index: 1;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 8%;
+      padding: 10px;
+
+      .poster {
+        margin-right: 10px;
+        height: 100%;
+
+        img {
+          object-fit: cover;
+          height: 100%;
+        }
+      }
+
+      .title-card {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        flex: 1 1;
+        text-align: left;
+        margin: 0.3rem 0;
+
+        p:nth-child(1) {
+          font-weight: 500;
+          font-size: 1.4rem;
+        }
+
+        p:nth-child(2) {
+          font-weight: 400;
+          color: #0071eb;
+        }
+      }
+
+      .animation {
+        width: 3rem;
+        height: 3rem;
+        outline: 2px solid rgb(0, 0, 0);
+        outline-offset: -2px;
+        display: block;
+        background: url(https://assets.nflxext.com/ffe/siteui/acquisition/ourStory/fuji/desktop/download-icon.gif) center center no-repeat;
+        background-size: 100%;
+        content: "";
+        flex-grow: 0;
+        flex-shrink: 0;
+      }
+    }
+  }
+}
+
+.image.start {
+  .main {
+    display: block;
+  }
+
+  .sub {
+    display: block;
+  }
+}
+
+@keyframes leftToRight {
+  0% {
+    transform: translateX(-110%);
+  }
+
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+@keyframes rightToLeft {
+  0% {
+    transform: translateX(110%);
+  }
+
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+@media only screen and (max-width: 991px) {
+  .image {
+    flex-direction: column;
+    height: auto;
+    padding: 20px 0;
+    align-items: center;
+
+    .main {
+      width: 100%;
+    }
+  }
+}

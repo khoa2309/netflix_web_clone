@@ -9,6 +9,8 @@
 firebase.json
 /src/firebase.js
 /src/app
+/src/features
+/src/request
 
 /.pnp
 .pnp.js

@@ -1,0 +1,16 @@
+.inner {
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: absolute;
+  left: 0;
+  right: 0;
+  padding: 0 150px;
+  z-index: 1;
+  img {
+    display: block;
+    width: 9.25rem;
+    height: 2.5rem;
+  }
+}
