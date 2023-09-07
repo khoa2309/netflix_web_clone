@@ -14,6 +14,7 @@ export default function SignIn() {
     if (user) {
       navigate("/home");
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
   return (
     <div className={c("wrapper")}>

@@ -2,7 +2,7 @@ import classNames from "classnames/bind";
 import styles from "./Banner.module.scss";
 import img from "~/assets";
 import Button from "../Button";
-import { memo, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "~/axios/axios";
 import { API_KEY } from "~/request/request";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

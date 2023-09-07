@@ -1,7 +1,6 @@
 import classNames from "classnames/bind";
 import styles from "./Contact.module.scss";
 import Question from "./Question";
-import { useEffect, useState } from "react";
 const c = classNames.bind(styles);
 const questions = [
   {
