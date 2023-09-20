@@ -7,20 +7,23 @@ import ProtectedRoutes, {
 import MainLayout from "./layout/MainLayout";
 import { Fragment, useEffect } from "react";
 import { auth } from "./firebase";
-import { useDispatch, useSelector } from "react-redux";
-import { login, logout, selectUser } from "./features/userSlice";
+import { useDispatch } from "react-redux";
+import { login, logout } from "./features/userSlice";
 import ScrollToTop from "./routes/ScrollToTop";
+import { useState } from "react";
 
 function App() {
-  let user = useSelector(selectUser);
+  const [currentUser, setCurrentUser] = useState(false);
   const dispatch = useDispatch();
 
   useEffect(() => {
     const unsubcribe = auth.onAuthStateChanged((userAuth) => {
       if (userAuth) {
         dispatch(login({ uid: userAuth.uid, email: userAuth.email }));
+        setCurrentUser(true);
       } else {
         dispatch(logout());
+        setCurrentUser(false);
       }
     });
     return unsubcribe;
@@ -31,7 +34,7 @@ function App() {
       <Router>
         <ScrollToTop />
         <Routes>
-          <Route element={<PublicRoutes user={user} />}>
+          <Route element={<PublicRoutes user={currentUser} />}>
             {publicRoutes.map((route, index) => {
               let Layout = MainLayout;
               if (route.layout) {
@@ -53,7 +56,7 @@ function App() {
               );
             })}
           </Route>
-          <Route element={<ProtectedRoutes user={user} />}>
+          <Route element={<ProtectedRoutes user={currentUser} />}>
             {privateRoutes.map((route, index) => {
               let Layout = MainLayout;
               if (route.layout) {
