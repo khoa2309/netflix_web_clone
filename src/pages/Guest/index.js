@@ -1,27 +1,12 @@
 import classNames from "classnames/bind";
 import styles from "./Guest.module.scss";
-import { useSelector } from "react-redux";
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { selectUser } from "~/features/userSlice";
-
-import { lazy, Suspense } from "react";
-
-const Story = lazy(() => import("../../components/Story"));
-const Signup = lazy(() => import("../../components/Signup"));
-const Footer = lazy(() => import("../../components/Footer"));
+import Story from "~/components/Story";
+import Signup from "~/components/Signup";
+import Footer from "~/components/Footer";
 
 const c = classNames.bind(styles);
 
 export default function Guest() {
-  const user = useSelector(selectUser);
-  const navigate = useNavigate();
-  useEffect(() => {
-    if (user) {
-      navigate("/home");
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user]);
   const video = [
     {
       title: "Thưởng thức trên TV của bạn",
@@ -78,14 +63,12 @@ export default function Guest() {
           <Signup onlyForm />
         </div>
       </div>
-      <Suspense fallback={<div>Loading...</div>}>
-        <Story video={video[0]}></Story>
-        <Story image={image[0]}></Story>
-        <Story video={video[1]}></Story>
-        <Story image={image[1]}></Story>
-        <Signup withContact />
-        <Footer SignUp />
-      </Suspense>
+      <Story video={video[0]}></Story>
+      <Story image={image[0]}></Story>
+      <Story video={video[1]}></Story>
+      <Story image={image[1]}></Story>
+      <Signup withContact />
+      <Footer SignUp />
     </div>
   );
 }
