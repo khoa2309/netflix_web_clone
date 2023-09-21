@@ -2,8 +2,20 @@ import Form from "~/components/Form";
 import classNames from "classnames/bind";
 import styles from "./SignIn.module.scss";
 import Footer from "~/components/Footer";
+import { useSelector } from "react-redux";
+import { selectUser } from "~/features/userSlice";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 const c = classNames.bind(styles);
 export default function SignIn() {
+  const user = useSelector(selectUser);
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (user) {
+      navigate("/home");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user]);
   return (
     <div className={c("wrapper")}>
       <div className={c("background")}>
