@@ -1,15 +1,23 @@
 import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 export default function ScrollToTop() {
+  const location = useLocation();
   useEffect(() => {
-    const handleUnload = () => {
+    const handleLoad = () => {
       window.scrollTo(0, 0);
     };
-    window.addEventListener("unload", handleUnload);
+
+    window.addEventListener("unload", handleLoad);
+
     return () => {
-      window.removeEventListener("unload", handleUnload);
+      window.removeEventListener("unload", handleLoad);
     };
   }, []);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location]);
 
   return null;
 }

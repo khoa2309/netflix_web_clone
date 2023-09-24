@@ -125,7 +125,7 @@ function Nav({ path }) {
                 {isParent ? (
                   <>
                     <div onClick={() => setDropdown((prev) => !prev)}>
-                      <Link>{item.title}</Link>
+                      <span>{item.title}</span>
                       {dropdown ? (
                         <FontAwesomeIcon
                           icon={faCaretRight}
