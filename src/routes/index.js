@@ -11,14 +11,14 @@ import HorrorMovie from "~/pages/Type/HorrorMovie";
 import RomanceMovie from "~/pages/Type/RomanceMovie";
 import DocumentariesMovie from "~/pages/Type/Documentaries";
 
-import { Outlet } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 const ProtectedRoutes = ({ user }) => {
-  return user ? <Outlet /> : false;
+  return user ? <Outlet /> : <Navigate to="/" replace />;
 };
 export default ProtectedRoutes;
 
 export const PublicRoutes = ({ user }) => {
-  return user ? false : <Outlet />;
+  return user ? <Navigate to="/home" replace /> : <Outlet />;
 };
 
 const publicRoutes = [
