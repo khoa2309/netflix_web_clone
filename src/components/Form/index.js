@@ -9,14 +9,14 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "~/firebase";
-import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectEmail } from "~/features/emailSlice";
+import { login } from "~/features/userSlice";
 
 const c = classNames.bind(styles);
 function Form() {
   const currentEmail = useSelector(selectEmail);
-  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [show, setShow] = useState(false);
   const [toggle, setToggle] = useState(true);
   const [email, setEmail] = useState(currentEmail);
@@ -41,14 +41,19 @@ function Form() {
     }
   };
 
-  const login = (e) => {
+  const handleLogin = (e) => {
     e.preventDefault();
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         alert(
           "Chúc mừng " + userCredential.user.email + " đã đăng nhập thành công"
         );
-        navigate("/home");
+        dispatch(
+          login({
+            uid: userCredential.user.uid,
+            email: userCredential.user.email,
+          })
+        );
       })
       .catch((error) => {
         alert(error.message.slice(10, error.length));
@@ -95,7 +100,7 @@ function Form() {
         </div>
       )}
       {toggle ? (
-        <Button login large onClick={login}>
+        <Button login large onClick={handleLogin}>
           Đăng nhập
         </Button>
       ) : (
@@ -118,7 +123,7 @@ function Form() {
           <Link onClick={() => setToggle(true)}>Đăng nhập thôi nào!</Link>
         )}
       </p>
-      <p className={c("more-desc")}>
+      <span className={c("more-desc")}>
         <span>
           Trang này được Google reCAPTCHA bảo vệ để đảm bảo bạn không phải là
           robot.
@@ -141,7 +146,7 @@ function Form() {
         ) : (
           <span onClick={() => setShow(true)}>Tìm hiểu thêm.</span>
         )}
-      </p>
+      </span>
     </form>
   );
 }

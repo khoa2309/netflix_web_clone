@@ -2,15 +2,14 @@ import classNames from "classnames/bind";
 import styles from "./Profile.module.scss";
 import Button from "~/components/Button";
 import { auth } from "~/firebase";
-import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { selectUser } from "~/features/userSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { logout, selectUser } from "~/features/userSlice";
 
 const c = classNames.bind(styles);
 
 function Profile() {
   const user = useSelector(selectUser);
-  const navigate = useNavigate();
+  const dispatch = useDispatch();
   return (
     <div className={c("profile")}>
       <h1>Edit Profile</h1>
@@ -26,8 +25,8 @@ function Profile() {
             <Button
               SignOut
               onClick={() => {
+                dispatch(logout());
                 auth.signOut();
-                navigate("/");
               }}
             >
               Đăng xuất

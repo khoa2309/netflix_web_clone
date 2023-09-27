@@ -5,27 +5,13 @@ import ProtectedRoutes, {
   PublicRoutes,
 } from "./routes";
 import MainLayout from "./layout/MainLayout";
-import { Fragment, useEffect } from "react";
-import { auth } from "./firebase";
-import { useDispatch, useSelector } from "react-redux";
-import { login, logout, selectUser } from "./features/userSlice";
+import { Fragment } from "react";
+import { useSelector } from "react-redux";
+import { selectUser } from "./features/userSlice";
 import ScrollToTop from "./routes/ScrollToTop";
 
 function App() {
   const user = useSelector(selectUser);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    const unsubcribe = auth.onAuthStateChanged((userAuth) => {
-      if (userAuth) {
-        dispatch(login({ uid: userAuth.uid, email: userAuth.email }));
-      } else {
-        dispatch(logout());
-      }
-    });
-    return unsubcribe;
-  }, [dispatch]);
-
   return (
     <div className="Netflix">
       <Router>
