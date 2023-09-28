@@ -55,7 +55,7 @@ const NavLinks = [
     ],
   },
   {
-    title: "Danh sách của bạn",
+    title: "Danh sách yêu thích",
     link: "/mylist",
     isActive: false,
   },
