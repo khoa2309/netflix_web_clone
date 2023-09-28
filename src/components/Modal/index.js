@@ -1,12 +1,7 @@
 import React, { useState, useEffect } from "react";
 import classNames from "classnames/bind";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faAdd,
-  faCheck,
-  faClose,
-  faPlay,
-} from "@fortawesome/free-solid-svg-icons";
+import { faAdd, faClose, faPlay } from "@fortawesome/free-solid-svg-icons";
 import Button from "../Button";
 import img from "~/assets";
 import axios from "~/axios/axios";
@@ -102,15 +97,15 @@ function Modal({ movie, title, onClick }) {
               )}
 
               <FontAwesomeIcon
-                icon={isCurrent ? faCheck : faAdd}
+                icon={isCurrent ? faClose : faAdd}
                 className={c("btn-add")}
-                title={
-                  isCurrent
-                    ? "Xóa khỏi danh sách của tôi"
-                    : "Thêm vào danh sách của tôi"
-                }
                 onClick={toggleAddToMyList}
               />
+              <span className={c("add_remove")}>
+                {isCurrent
+                  ? "Xóa khỏi danh sách yêu thích"
+                  : "Thêm vào danh sách yêu thích"}
+              </span>
             </div>
             <div className={c("more-desc")}>
               <p className={c("like")}>

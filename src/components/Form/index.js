@@ -52,6 +52,7 @@ function Form() {
           login({
             uid: userCredential.user.uid,
             email: userCredential.user.email,
+            isSave: check.current.checked,
           })
         );
       })
@@ -113,7 +114,7 @@ function Form() {
         <label htmlFor="checkbox" className={c("my-label")}>
           Ghi nhớ tôi
         </label>
-        <a href="/help">Bạn cần trợ giúp?</a>
+        <a href="/login">Bạn cần trợ giúp?</a>
       </div>
       <p className={c("link-signup")}>
         {toggle ? "Bạn mới tham gia Netflix?" : "Bạn đã đăng ký thành công?"}
