@@ -39,6 +39,7 @@
   .row_poster {
     border-radius: 5px;
     object-fit: contain;
+    height: 200px;
     max-height: 200px;
     transition: transform 450ms;
     &:hover {
@@ -47,7 +48,10 @@
     }
   }
   .row_posterLarge {
-    max-height: 400px;
+   height: 400px;
+   max-height: 400px;
+   width: 266px;
+   object-fit: cover;
     &:hover {
       transform: scale(1.09);
       opacity: 1;
