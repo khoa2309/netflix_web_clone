@@ -5,7 +5,6 @@ import classNames from "classnames/bind";
 import styles from "./Signup.module.scss";
 import Button from "~/components/Button";
 import Contact from "../Contact";
-import config from "~/config";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setcurrValue } from "~/features/emailSlice";
@@ -83,6 +82,11 @@ function Signup({ onlyForm, withContact }) {
     [dispatch, isEmail, navigate, value]
   );
 
+  const handleType = useCallback(() => {
+    document.getElementById("error-span").style.visibility = "hidden";
+    document.getElementById("wrapper").style.borderColor =
+      "rgba(128, 128, 128, 0.7)";
+  }, []);
   if (onlyForm) {
     return (
       <form className={c("signup")}>
@@ -95,6 +99,8 @@ function Signup({ onlyForm, withContact }) {
             name="email"
             autoComplete="email"
             onChange={(e) => setValue(e.target.value)}
+            onFocus={handleType}
+            onBlur={handleType}
           />
           <label htmlFor="email-input">Địa chỉ email</label>
           <span id="error-span">
@@ -103,12 +109,7 @@ function Signup({ onlyForm, withContact }) {
           </span>
           <div className={c("wrapper")} id="wrapper"></div>
         </div>
-        <Button
-          signup
-          to={config.routes.login}
-          onClick={handleClick}
-          ismemoized="true"
-        >
+        <Button signup onClick={handleClick} ismemoized="true">
           Bắt đầu
         </Button>
       </form>
@@ -128,6 +129,8 @@ function Signup({ onlyForm, withContact }) {
               name="email"
               autoComplete="email"
               onChange={(e) => setValue(e.target.value)}
+              onFocus={handleType}
+              onBlur={handleType}
             />
             <label htmlFor="email-input">Địa chỉ email</label>
             <span id="error-span-contact">
@@ -136,12 +139,7 @@ function Signup({ onlyForm, withContact }) {
             </span>
             <div className={c("wrapper")} id="wrapper-contact"></div>
           </div>
-          <Button
-            signup
-            to={config.routes.login}
-            onClick={handleClickContact}
-            ismemoized="true"
-          >
+          <Button signup onClick={handleClickContact} ismemoized="true">
             Bắt đầu
           </Button>
         </form>
