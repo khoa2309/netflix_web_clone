@@ -93,7 +93,11 @@ function Nav({ path }) {
 
   useEffect(() => {
     inputRef.current.value = "";
-    dispatch(clear());
+    if (path === "/mylist") {
+      dispatch(restore());
+    } else {
+      dispatch(clear());
+    }
     setSearch(false);
     window.addEventListener("scroll", handleSroll);
     return () => window.removeEventListener("scroll", handleSroll);
