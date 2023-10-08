@@ -6,22 +6,26 @@
   scroll-behavior: smooth;
   padding: 20px;
 }
+
 .isTypeList {
   flex-wrap: wrap;
   justify-content: center;
   row-gap: 50px;
+
   p {
-    max-width: 280px;
+    max-width: 266px;
   }
 }
+
 .isMyList {
   justify-content: center;
   flex-wrap: wrap;
   gap: 5px;
   row-gap: 50px;
   margin: 3rem 0;
+
   p {
-    max-width: 260px;
+    max-width: 266px;
   }
 }
 
@@ -36,25 +40,30 @@
   margin-right: 10px;
   position: relative;
   right: -5px;
+
   .row_poster {
     border-radius: 5px;
     object-fit: contain;
     height: 200px;
     transition: transform 450ms;
+
     &:hover {
       transform: scale(1.08);
       opacity: 1;
     }
   }
+
   .row_posterLarge {
-   height: 400px;
-   width: 266px;
-   object-fit: cover;
+    height: 400px;
+    width: 266px;
+    object-fit: cover;
+
     &:hover {
       transform: scale(1.09);
       opacity: 1;
     }
   }
+
   p {
     text-align: center;
     font-size: 1.1rem;
@@ -62,6 +71,7 @@
     margin-top: 10px;
     transition: all 0.3s;
   }
+
   &:hover p {
     color: red;
   }
@@ -76,10 +86,12 @@
   transform: translateY(-85%);
   z-index: 20;
   transition: all 0.2s;
+
   &:hover {
     transform: scale(1.2) translateY(-85%);
   }
 }
+
 .icon-right {
   position: sticky;
   height: 35px;
@@ -89,6 +101,7 @@
   transform: translateY(-85%);
   z-index: 20;
   transition: all 0.2s;
+
   &:hover {
     transform: scale(1.2) translateY(-85%);
   }
